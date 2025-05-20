@@ -130,16 +130,26 @@ const latestDate = getLatestOrOldestDate(dates, 'latest')
 const firstAccount = merged[0]
 const lastAccount = merged[merged.length-1]
 
-//false console.log("date",!isNaN(new Date(state.userInput.startPeriod)));
-//true console.log(Number.isNaN(state.userInput.startAccount))
+var startAccount = (state.userInput.startAccount !== undefined && Number.isNaN(state.userInput.startAccount))
+  ? merged[0].ACCOUNT
+  : state.userInput.startAccount;
 
-//false console.log("date",!isNaN(new Date(state.userInput.endPeriod)));
-//true console.log(Number.isNaN(state.userInput.endAccount))
+var endAccount = (state.userInput.startAccount !== undefined && Number.isNaN(state.userInput.endAccount))
+  ? merged[merged.length - 1].ACCOUNT
+  : state.userInput.endAccount;
+
+var startPeriod = (state.userInput.startAccount !== undefined && isNaN(new Date(state.userInput.startPeriod)))
+  ? oldestDate
+  : state.userInput.startPeriod;
+
+var endPeriod = (state.userInput.startAccount !== undefined && isNaN(new Date(state.userInput.endPeriod)))
+  ? latestDate
+  : state.userInput.endPeriod;
 
 balance = merged.map(acc=>
-    acc.ACCOUNT>=state.userInput.startAccount && acc.ACCOUNT<=state.userInput.endAccount&&
-    new Date(acc.PERIOD)>=new Date(state.userInput.startPeriod) && 
-    new Date(acc.PERIOD)<=new Date(state.userInput.endPeriod)?
+      acc.ACCOUNT>=startAccount && acc.ACCOUNT<=endAccount&&
+    new Date(acc.PERIOD)>=new Date(startPeriod) && 
+    new Date(acc.PERIOD)<=new Date(endPeriod)?
   ({
   ACCOUNT: acc.ACCOUNT,
    DESCRIPTION: acc.LABEL,
