@@ -134,15 +134,15 @@ var startAccount = (state.userInput.startAccount !== undefined && Number.isNaN(s
   ? merged[0].ACCOUNT
   : state.userInput.startAccount;
 
-var endAccount = (state.userInput.startAccount !== undefined && Number.isNaN(state.userInput.endAccount))
+var endAccount = (state.userInput.endAccount !== undefined && Number.isNaN(state.userInput.endAccount))
   ? merged[merged.length - 1].ACCOUNT
   : state.userInput.endAccount;
 
-var startPeriod = (state.userInput.startAccount !== undefined && isNaN(new Date(state.userInput.startPeriod)))
+var startPeriod = (state.userInput.startPeriod !== undefined && isNaN(new Date(state.userInput.startPeriod)))
   ? oldestDate
   : state.userInput.startPeriod;
 
-var endPeriod = (state.userInput.startAccount !== undefined && isNaN(new Date(state.userInput.endPeriod)))
+var endPeriod = (state.userInput.endPeriod !== undefined && isNaN(new Date(state.userInput.endPeriod)))
   ? latestDate
   : state.userInput.endPeriod;
 
